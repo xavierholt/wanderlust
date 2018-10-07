@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="coverage.js"></script>
+    <script src="random.js"></script>
+    <script src="viewer.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&callback=init" defer async></script>
+    <link rel="icon" href="viewer.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="viewer.css" />
+    <title>Wanderlust</title>
+  </head>
+  <body>
+    <div id="viewer-wrapper">
+      <div id="viewer"></div>
+      <div id="viewer-buttons">
+        <a id="reset" title="Return to your starting position.">♔</a>
+        <!-- <a id="flag1">♕</a>
+        <a id="flag2">♖</a>
+        <a id="flag3">♗</a>
+        <a id="flag4">♘</a>
+        <a id="flag5">♙</a> -->
+      </div>
+    </div>
+    <div id="finder-wrapper">
+      <div id="finder"></div>
+      <div id="finder-buttons" class="buttons">
+        <a id="more-finder">+</a><a id="less-finder">&ndash;</a><a id="make-guess">Make Guess</a><a id="clear-guess">Clear Guess</a>
+      </div>
+      <div id="scorer-buttons" class="buttons">
+        <span id="distance">Distance: 0 m</span><a id="next-round">Next Round</a>
+      </div>
+    </div>
+  </body>
+</html>

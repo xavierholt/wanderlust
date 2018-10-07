@@ -1,0 +1,161 @@
+html, body {
+  margin:   0;
+  padding:  0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#viewer-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+#viewer {
+  height: 100%;
+  width:  100%;
+}
+
+#viewer-buttons {
+  position: absolute;
+  top: 58px;
+  left: 0;
+
+  z-index: 2;
+}
+
+#viewer-buttons > a {
+  color: #b1b1b1;
+  background-color: #222222;
+  cursor: pointer;
+
+  font-family: sans-serif;
+  text-decoration: none;
+
+  text-align: center;
+  border-radius: 15px;
+  line-height: 30px;
+  height: 30px;
+  width: 30px;
+
+  display: block;
+  margin: 5px 10px;
+  padding: 0;
+}
+
+#viewer-buttons > a:hover {
+  color: #d1d1d1;
+  text-shadow: 0 0 6pt #ffffff;
+}
+
+a#reset {
+  margin-bottom: 10px;
+}
+
+#finder-wrapper {
+  box-shadow: 0 0 1em 1em rgba(0, 0, 0, 0.25);
+  transition: width 0.5s, left 0.5s;
+  width: 50%;
+
+  position: absolute;
+  top:     0;
+  left:    100%;
+  bottom:  0;
+  z-index: 2;
+}
+
+#finder-wrapper.half {
+  left: 50%;
+}
+
+#finder-wrapper.full {
+  left:     0;
+  width: 100%;
+}
+
+#finder-buttons {
+  position: absolute;
+  height: 48px;
+  top: 10px;
+  left: -2.5em;
+}
+
+body.score #finder-buttons {
+  display: none;
+}
+
+.buttons > * {
+  color: #b1b1b1;
+  background-color: #222222;
+  border-radius: 1.5em;
+  display: inline-block;
+
+  font-family: sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+
+  height: 48px;
+  line-height: 48px;
+  margin-right: 1em;
+  padding: 0 1.5em;
+}
+
+.buttons > a {
+  cursor: pointer;
+}
+
+.buttons > a:hover {
+  text-shadow: 0 0 6pt #ffffff;
+}
+
+#make-guess, #clear-guess {
+  color: #595959;
+  text-shadow: none;
+}
+
+#finder-wrapper.mark > #finder-buttons > a {
+  color: #b1b1b1;
+}
+
+#finder-wrapper.mark > #finder-buttons > a:hover {
+  color: #d1d1d1;
+  text-shadow: 0 0 6pt #ffffff;
+}
+
+a#more-finder {
+  text-align: center;
+  width: 2.5em;
+
+  border-radius: 1.5em 0 0 1.5em;
+  padding: 0;
+  margin: 0;
+}
+
+a#less-finder {
+  text-align: center;
+  width: 2.5em;
+
+  border-radius: 0 1.5em 1.5em 0;
+  padding: 0;
+}
+
+#finder {
+  height: 100%;
+  width:  100%;
+}
+
+#scorer-buttons {
+  position: absolute;
+  top: 10px;
+  left: 1em;
+  z-index: 3;
+
+  display: none;
+}
+
+body.score #scorer-buttons {
+  display: block;
+}
