@@ -9,8 +9,8 @@ function select(poly) {
     selection.setEditable(false)
   }
 
-  var name = document.getElementById('name')
-  var isle = document.getElementById('island')
+  let name = document.getElementById('name')
+  let isle = document.getElementById('island')
 
   if(poly) {
     poly.setEditable(true)
@@ -33,7 +33,7 @@ function bindpoly(poly) {
   shapes.add(poly)
   google.maps.event.addListener(poly, 'click', function(e) {
     if(e.vertex !== undefined) {
-      var path = poly.getPaths().getAt(e.path)
+      let path = poly.getPaths().getAt(e.path)
       path.removeAt(e.vertex)
       if(path.length < 3) {
         rempoly(poly)
@@ -46,7 +46,7 @@ function bindpoly(poly) {
 }
 
 function addpoly(geom, feature) {
-  var poly = new google.maps.Polygon({
+  let poly = new google.maps.Polygon({
     paths: geom.getArray().map(ring => ring.getArray()),
     map: map
   })
@@ -76,17 +76,17 @@ function initialize() {
     zoom: 2
   })
 
-  var streetview = new google.maps.StreetViewCoverageLayer()
+  let streetview = new google.maps.StreetViewCoverageLayer()
   streetview.setMap(map)
 
-  var drawingManager = new google.maps.drawing.DrawingManager({
+  let drawingManager = new google.maps.drawing.DrawingManager({
     drawingControlOptions: {drawingModes: ['polygon']},
     polygonOptions: {editable: true},
     map: map
   })
 
   google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
-    var poly = e.overlay
+    let poly = e.overlay
     poly.name = "New Polygon"
     poly.island = false
 
@@ -117,12 +117,12 @@ function initialize() {
     event.stopPropagation()
     event.preventDefault()
 
-    var reader = new FileReader()
+    let reader = new FileReader()
     reader.onload = function(){
-      var json = JSON.parse(reader.result)
-      var data = new google.maps.Data().addGeoJson(json)
+      let json = JSON.parse(reader.result)
+      let data = new google.maps.Data().addGeoJson(json)
       data.forEach(function(feature) {
-        var geom = feature.getGeometry()
+        let geom = feature.getGeometry()
         if(geom.getType() === 'MultiPolygon') {
           geom.getArray().forEach(poly => {addpoly(poly, feature)})
         }
@@ -139,7 +139,7 @@ function initialize() {
     event.stopPropagation()
     event.preventDefault()
 
-    var data = {
+    let data = {
       type: "FeatureCollection",
       features: Array.from(shapes).map(function(poly) {
         return {
@@ -163,10 +163,10 @@ function initialize() {
 
     // Download trick based on answers to:
     // https://stackoverflow.com/questions/19327749
-    var link = document.getElementById('download')
-    var json = JSON.stringify(data, null, 2)
-    var blob = new Blob([json], {type: 'application/json'})
-    var href = window.URL.createObjectURL(blob)
+    let link = document.getElementById('download')
+    let json = JSON.stringify(data, null, 2)
+    let blob = new Blob([json], {type: 'application/json'})
+    let href = window.URL.createObjectURL(blob)
     link.href = href
     link.click()
 

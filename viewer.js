@@ -91,20 +91,23 @@ function set_marker(position) {
   }
 }
 
+function format(distance) {
+  let precision = 0
+  if(distance < 100) precision += 1
+  if(distance <  10) precision += 1
+  return distance.toFixed(precision)
+}
+
 function format_meters(meters) {
   if(meters > 1000) {
-    return Math.round(meters / 1000) + " km"
+    return format(meters / 1000) + ' km'
   }
-  else if(meters < 1) {
-    return Math.round(meters * 100) + " cm"
-  }
-  else {
-    return Math.round(meters) + " m"
-  }
+
+  return format(meters) + ' m'
 }
 
 function show_score(meters) {
-  document.getElementById('distance').textContent = "Distance: " + format_meters(meters)
+  document.getElementById('distance').textContent = 'Distance: ' + format_meters(meters)
   document.getElementById('finder-wrapper').classList.replace('half', 'full')
   set_scoring(true)
 }
@@ -152,10 +155,8 @@ window.addEventListener('load', function() {
     show_score(m)
   })
 
-
   document.addEventListener('keydown', function(event) {
     if(event.key === '[') more_finder()
     if(event.key === ']') less_finder()
   })
-
 })
