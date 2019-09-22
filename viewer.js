@@ -25,11 +25,20 @@ function init() {
   finder = new google.maps.Map(document.getElementById('finder'), {
     streetView: viewer,
     draggableCursor: 'pointer',
-    draggingCursor: 'all-scroll',
+    draggingCursor: 'move',
     disableDefaultUI: true,
     clickableIcons: false,
     center: {lat: 0, lng: 0},
     zoom: 2
+  })
+
+  // Event handlers for history.js:
+  viewer.addListener('pano_changed', function() {
+    View.push(viewer)
+  })
+
+  viewer.addListener('pov_changed', function() {
+    View.update(viewer)
   })
 
   let opts = {map: finder, visible: false, geodesic: true}
@@ -125,6 +134,7 @@ function next_round(meters) {
   set_marker(undefined)
 
   // Here we go again!
+  View.clear()
   set_scoring(false)
   random.panorama()
 }
@@ -135,6 +145,7 @@ window.addEventListener('load', function() {
   document.getElementById('clear-guess').addEventListener('click', e => set_marker())
   document.getElementById('next-round' ).addEventListener('click', e => next_round())
   document.getElementById('reset'      ).addEventListener('click', e => set_panorama(panoid))
+  document.getElementById('back'       ).addEventListener('click', e => View.pop())
 
   document.getElementById('make-guess').addEventListener('click', function(event) {
     if(!marker.getVisible()) return
@@ -156,6 +167,7 @@ window.addEventListener('load', function() {
   })
 
   document.addEventListener('keydown', function(event) {
+    if(event.key === '0') viewer.setZoom(1)
     if(event.key === '[') more_finder()
     if(event.key === ']') less_finder()
   })

@@ -4,9 +4,8 @@ var shapes = []
 var area = 0
 
 function reloadArea() {
-  area = 0
-  shapes.sort(function(a, b) {return a.area - b.area})
-  shapes.forEach(function(s) {area += s.area})
+  shapes.sort((a, b) => a.area - b.area)
+  area = shapes.reduce((a, s) => a + s.area, 0)
 }
 
 function loadGeoJson(json) {
