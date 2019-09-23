@@ -10,16 +10,13 @@ function select(poly) {
   }
 
   let name = document.getElementById('name')
-  let isle = document.getElementById('island')
 
   if(poly) {
     poly.setEditable(true)
     name.value = poly.name
-    island.checked = poly.island
   }
   else {
     name.value = ''
-    island.checked = false
   }
 
   selection = poly
@@ -31,10 +28,10 @@ function deselect() {
 
 function bindpoly(poly) {
   shapes.add(poly)
-  google.maps.event.addListener(poly, 'click', function(e) {
-    if(e.vertex !== undefined) {
-      let path = poly.getPaths().getAt(e.path)
-      path.removeAt(e.vertex)
+  google.maps.event.addListener(poly, 'click', event => {
+    if(event.vertex !== undefined) {
+      let path = poly.getPaths().getAt(event.path)
+      path.removeAt(event.vertex)
       if(path.length < 3) {
         rempoly(poly)
         return
@@ -43,17 +40,6 @@ function bindpoly(poly) {
 
     select(poly)
   })
-}
-
-function addpoly(geom, feature) {
-  let poly = new google.maps.Polygon({
-    paths: geom.getArray().map(ring => ring.getArray()),
-    map: map
-  })
-
-  poly.name = feature.getProperty('name') || "Unnamed Polygon"
-  poly.island = feature.getProperty('island') || false
-  bindpoly(poly)
 }
 
 function rempoly(poly) {
@@ -85,12 +71,11 @@ function initialize() {
     map: map
   })
 
-  google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
-    let poly = e.overlay
-    poly.name = "New Polygon"
-    poly.island = false
-
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', event => {
     drawingManager.setDrawingMode(null)
+
+    let poly  = event.overlay
+    poly.name = "New Polygon"
     bindpoly(poly)
     select(poly)
   })
@@ -99,36 +84,25 @@ function initialize() {
   google.maps.event.addListener(drawingManager, 'drawingmode_changed', deselect)
   google.maps.event.addListener(map, 'click', deselect)
 
-  document.getElementById('name').addEventListener('change', function(event) {
+  document.getElementById('name').addEventListener('change', event => {
     if(selection) selection.name = event.target.value
   })
 
-  document.getElementById('island').addEventListener('change', function(event) {
-    if(selection) selection.island = event.target.checked
-  })
-
-  document.getElementById('dele').addEventListener('click', function(event) {
+  document.getElementById('dele').addEventListener('click', event => {
     event.stopPropagation()
     event.preventDefault()
     rempoly(selection)
   })
 
-  document.getElementById('file').addEventListener('change', function(event) {
+  document.getElementById('file').addEventListener('change', event => {
     event.stopPropagation()
     event.preventDefault()
 
     let reader = new FileReader()
-    reader.onload = function(){
-      let json = JSON.parse(reader.result)
-      let data = new google.maps.Data().addGeoJson(json)
-      data.forEach(function(feature) {
-        let geom = feature.getGeometry()
-        if(geom.getType() === 'MultiPolygon') {
-          geom.getArray().forEach(poly => {addpoly(poly, feature)})
-        }
-        else if(geom.getType() === 'Polygon') {
-          addpoly(geom, feature)
-        }
+    reader.onload = function() {
+      geotxt.decode(reader.result).forEach(poly => {
+        poly.setMap(map)
+        bindpoly(poly)
       })
     }
 
@@ -139,33 +113,13 @@ function initialize() {
     event.stopPropagation()
     event.preventDefault()
 
-    let data = {
-      type: "FeatureCollection",
-      features: Array.from(shapes).map(function(poly) {
-        return {
-          type: "Feature",
-          properties: {
-            name:   poly.name,
-            area:   google.maps.geometry.spherical.computeArea(poly.getPath()),
-            island: poly.island
-          },
-          geometry: {
-            type: "Polygon",
-            coordinates: poly.getPaths().getArray().map(function(ring) {
-              let array = ring.getArray().map(p => [p.lng(), p.lat()])
-              array.push(array[0])
-              return array
-            })
-          }
-        }
-      })
-    }
+    let list = Array.from(shapes).sort((a, b) => a.name.localeCompare(b.name))
+    let data = geotxt.encode(list)
 
     // Download trick based on answers to:
     // https://stackoverflow.com/questions/19327749
     let link = document.getElementById('download')
-    let json = JSON.stringify(data, null, 2)
-    let blob = new Blob([json], {type: 'application/json'})
+    let blob = new Blob([data], {type: 'text/plain'})
     let href = window.URL.createObjectURL(blob)
     link.href = href
     link.click()

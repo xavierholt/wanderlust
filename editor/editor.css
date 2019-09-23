@@ -32,7 +32,7 @@
   /*cursor: pointer;*/
 }
 
-#buttons > button:hover, #buttons > label:hover {
+#buttons > button:hover, #load:hover {
   background-color: #ebebeb;
 }
 
@@ -53,15 +53,11 @@
   padding: 0 0 0 4px;
 }
 
-#buttons > #isle {
+#buttons > #name-label {
   /*cursor: pointer;*/
   display: inline-block;
   border-radius: 0 2px 2px 0;
   padding: 0 4px 0 4px;
 
   box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-}
-
-#island:checked + label {
-  background-color: green;
 }

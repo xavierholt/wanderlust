@@ -162,13 +162,30 @@ window.addEventListener('load', function() {
 
     let m = google.maps.geometry.spherical.computeDistanceBetween(a, b)
     console.log("Distance was " + format_meters(m) + ".")
-    finder.fitBounds(bounds)
+    finder.fitBounds(bounds, 50)
     show_score(m)
   })
 
   document.addEventListener('keydown', function(event) {
-    if(event.key === '0') viewer.setZoom(1)
-    if(event.key === '[') more_finder()
-    if(event.key === ']') less_finder()
+    console.log(event.key)
+    switch(event.key) {
+    case 'Backspace':
+      View.pop()
+      break
+    case '0':
+      viewer.setZoom(1)
+      break
+    case '[':
+      more_finder()
+      break
+    case ']':
+      less_finder()
+      break
+    default:
+      return
+    }
+
+    event.preventDefault()
+    return false
   })
 })
