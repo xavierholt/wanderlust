@@ -128,6 +128,11 @@ function initialize() {
       window.URL.revokeObjectURL(href)
     }, 0)
   })
+
+  window.addEventListener('beforeunload', function(event) {
+    event.preventDefault()
+    event.returnValue = ''
+  })
 }
 
 google.maps.event.addDomListener(window, 'load', initialize)
