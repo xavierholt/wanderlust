@@ -75,9 +75,11 @@ function initialize() {
     drawingManager.setDrawingMode(null)
 
     let poly  = event.overlay
-    poly.name = "New Polygon"
+    poly.name = 'New Polygon'
     bindpoly(poly)
     select(poly)
+
+    document.getElementById('name').select()
   })
 
   // Clear the current selection when the drawing mode is changed, or when the map is clicked.
@@ -86,6 +88,16 @@ function initialize() {
 
   document.getElementById('name').addEventListener('change', event => {
     if(selection) selection.name = event.target.value
+  })
+
+  document.getElementById('name').addEventListener('keydown', event => {
+    if(event.key == 'Enter') {
+      event.stopPropagation()
+      event.preventDefault()
+
+      drawingManager.setDrawingMode('polygon')
+      select(null)
+    }
   })
 
   document.getElementById('dele').addEventListener('click', event => {
