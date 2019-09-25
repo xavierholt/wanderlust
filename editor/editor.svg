@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <circle cx="50" cy="50" r="50" fill="#222222" />
+  <circle cx="50" cy="50" r="30" fill="#595959" />
+  <circle cx="50" cy="50" r="48" stroke="#595959" stroke-dasharray="3.14159 3.14159" fill="none" />
+
+  <polyline points="15,75 75,15 85,25 25,85" fill="#ffaa1d" />
+  <polyline points="75,15 85,05 95,15 85,25" fill="#d7837f" />
+  <polyline points="15,75 25,85  5,95" fill="#fdd9b5" />
+
+  <polyline points="70,19 75,14 86,25 81,30" fill="#d1d1d1" />
+  <polyline points="10,85 15,90  5,95" fill="#595959" />
+</svg>
