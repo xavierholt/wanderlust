@@ -3,6 +3,8 @@
   <circle cx="50" cy="50" r="50" fill="#222222" />
   <circle cx="50" cy="50" r="30" fill="#595959" />
   <circle cx="50" cy="50" r="48" stroke="#595959" stroke-dasharray="3.14159 3.14159" fill="none" />
-  <polyline points="60,60 40,40 90,10" fill="#c1272d" />
-  <polyline points="60,60 40,40 10,90" fill="#d1d1d1" />
+  <polyline points="40,40 50,50 90,10" fill="#c1272d" />
+  <polyline points="40,40 50,50 10,90" fill="#d1d1d1" />
+  <polyline points="60,60 50,50 90,10" fill="#a1070d" />
+  <polyline points="60,60 50,50 10,90" fill="#b1b1b1" />
 </svg>

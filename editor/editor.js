@@ -14,6 +14,7 @@ function select(poly) {
   if(poly) {
     poly.setEditable(true)
     name.value = poly.name
+    name.select()
   }
   else {
     name.value = ''
@@ -78,8 +79,6 @@ function initialize() {
     poly.name = 'New Polygon'
     bindpoly(poly)
     select(poly)
-
-    document.getElementById('name').select()
   })
 
   // Clear the current selection when the drawing mode is changed, or when the map is clicked.
@@ -87,7 +86,9 @@ function initialize() {
   google.maps.event.addListener(map, 'click', deselect)
 
   document.getElementById('name').addEventListener('change', event => {
-    if(selection) selection.name = event.target.value
+    if(selection) {
+      selection.name = event.target.value
+    }
   })
 
   document.getElementById('name').addEventListener('keydown', event => {
@@ -95,8 +96,11 @@ function initialize() {
       event.stopPropagation()
       event.preventDefault()
 
-      drawingManager.setDrawingMode('polygon')
-      select(null)
+      // drawingManager.setDrawingMode('polygon')
+      if(selection) {
+        selection.name = event.target.value
+        select(null)
+      }
     }
   })
 
@@ -112,7 +116,8 @@ function initialize() {
 
     let reader = new FileReader()
     reader.onload = function() {
-      geotxt.decode(reader.result).forEach(poly => {
+      let data = JSON.parse(reader.result)
+      geoson.decode(data).forEach(poly => {
         poly.setMap(map)
         bindpoly(poly)
       })
@@ -126,7 +131,7 @@ function initialize() {
     event.preventDefault()
 
     let list = Array.from(shapes).sort((a, b) => a.name.localeCompare(b.name))
-    let data = geotxt.encode(list)
+    let data = geoson.encode(list)
 
     // Download trick based on answers to:
     // https://stackoverflow.com/questions/19327749

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg viewBox="-60 -50 100 100" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <style>
+    polyline {
+      fill: none;
+      stroke: #d1d1d1;
+      stroke-linecap: round;
+      stroke-width: 4px;
+    }
+  </style>
+  <polyline points="-30,-24 -10,0 -30,24" />
+  <polyline points="-20,-26   0,0 -20,26" />
+  <polyline points="-10,-28  10,0 -10,28" />
+  <polyline points="  0,-30  20,0   0,30" />
+</svg>
