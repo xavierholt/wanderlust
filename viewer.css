@@ -170,13 +170,13 @@ body.score #scorer-buttons {
 }
 
 #next-round {
-  background-image: url('play.svg');
+  background-image: url('img/play.svg');
   background-repeat: no-repeat;
   padding-left: 3em;
 }
 
 body.loading #next-round {
-  background-image: url('loading.svg');
+  background-image: url('img/loading.svg');
 }
 
 
@@ -260,10 +260,10 @@ body.loading #next-round {
 #main #game-play {
   width: 1.5in;
 
-  background-image: url('play.svg');
+  background-image: url('img/play.svg');
   background-repeat: no-repeat;
 }
 
 body.loading #main #game-play {
-  background-image: url('loading.svg');
+  background-image: url('img/loading.svg');
 }

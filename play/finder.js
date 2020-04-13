@@ -10,12 +10,9 @@ class Finder {
       clickableIcons:   false
     })
 
-    let opts = {map: this.impl, visible: false, geodesic: true}
-    this.geodesic = new google.maps.Polyline(opts)
-    this.marker   = new google.maps.Marker(opts)
-    this.target   = new google.maps.Marker(opts)
-
-    // TODO: Custom start / guess markers.
+    this.geodesic = new google.maps.Polyline({map: this.impl, visible: false, geodesic: true})
+    this.marker   = new google.maps.Marker({  map: this.impl, visible: false, icon: 'img/guess-marker.svg'})
+    this.target   = new google.maps.Marker({  map: this.impl, visible: false, icon: 'img/start-marker.svg'})
 
     this.impl.addListener('click', e => {
       this.mark(e.latLng)

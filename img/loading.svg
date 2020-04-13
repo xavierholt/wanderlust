@@ -5,7 +5,7 @@
       fill: none;
       stroke: #d1d1d1;
       stroke-linecap: round;
-      stroke-width: 4px;
+      stroke-width: 3px;
     }
   </style>
   <path d="M -35,0 A 35 35 0 1 0 0,-35">
