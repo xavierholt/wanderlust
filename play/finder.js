@@ -35,7 +35,10 @@ class Finder {
   }
 
   mark(position) {
-    if(position) {
+    if(this.scoring) {
+      return
+    }
+    else if(position) {
       this.wrapper.classList.remove('unmarked')
       this.marker.setPosition(position)
       this.marker.setVisible(true)
@@ -59,19 +62,19 @@ class Finder {
   }
 
   reset(position) {
-    this.wrapper.classList.remove('half')
-    this.wrapper.classList.remove('full')
-
     this.impl.setCenter({lat: 0, lng: 0})
     this.impl.setZoom(2)
 
     this.geodesic.setVisible(false)
+    this.target.setPosition(position)
     this.target.setVisible(false)
+
+    this.scoring = false
     this.mark(undefined)
 
-    this.target.setPosition(position)
+    this.wrapper.classList.remove('half')
+    this.wrapper.classList.remove('full')
     document.body.classList.remove('score')
-    this.scoring = false
   }
 
   score() {
