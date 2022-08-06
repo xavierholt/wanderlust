@@ -3,11 +3,14 @@ var finder     = null
 var streetview = null
 
 var atlas = new Atlas()
-atlas.add('The World',  1, 'play/maps/world.json')
-atlas.add('Cities',     0, 'play/maps/cities.json')
-atlas.add('California', 1, 'play/maps/california.json')
-atlas.add('Japan',    0.5, 'play/maps/japan.json')
-atlas.add('Manhattan',  1, 'play/maps/manhattan.json')
+atlas.add('The World',       1.0, 'play/maps/world.json')
+atlas.add('Cities',          0.0, 'play/maps/cities.json')
+atlas.add('California',      1.0, 'play/maps/california.json')
+atlas.add('Japan',           0.5, 'play/maps/japan.json')
+atlas.add('Manhattan',       1.0, 'play/maps/manhattan.json')
+// atlas.add('Finland',         1.0, 'play/maps/finland.json')
+atlas.add('Taiwan',          1.0, 'play/maps/taiwan.json')
+atlas.add('Cities of India', 0.5, 'play/maps/india.json')
 
 var game    = null
 var loading = false
